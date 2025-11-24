@@ -114,7 +114,7 @@ let
         [
             Documentation.Name = "get-jira-sprints",
             Documentation.Description = "Get Jira sprints via /rest/agile/1.0/board and /rest/agile/1.0/board/{boardId}/sprint. The function first loads all boards, then pages through sprints for each board using startAt and an internal page size of 50 until all results are scanned based on the total field returned by the API. The result is returned as a typed table with sprint fields (id, state, name, startDate, endDate, completeDate, originBoardId and goal).",
-            Documentation.Source = "Jira Cloud Agile REST API documentation for board and sprint endpoints.",
+            Documentation.Source = "https://www.vojtechsima.com/",
             Documentation.Version = "1.1",
             Documentation.Author = "Vojtěch Šíma",
             Documentation.Examples =
@@ -130,4 +130,5 @@ in
     Value.ReplaceType(
         getJiraSprints,
         functionType
+
     )
