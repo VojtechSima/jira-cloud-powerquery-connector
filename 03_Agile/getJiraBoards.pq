@@ -1,5 +1,5 @@
 let
-    getJiraProjects =
+    getJiraBoards =
         (
             jiraHost as text,
             authorizationToken as text
@@ -53,7 +53,7 @@ let
 
             listResult = List.Combine(grabber),
 
-            projectsTable =
+            boardsTable =
                 #table(
                     type table
                     [
@@ -86,7 +86,7 @@ let
                     )
                 )
         in
-            projectsTable,
+            boardsTable,
 
     functionType =
         type function
@@ -120,13 +120,13 @@ let
                 {
                     [
                         Description = "Load boards with the internal default page size (50).",
-                        Code = "getJiraProjects(""https://tenant.atlassian.net"", ""Basic user:token"")",
+                        Code = "getJiraBoards(""https://tenant.atlassian.net"", ""Basic user:token"")",
                         Result = "Returns a table of Jira boards with board level fields and flattened location fields."
                     ]
                 }
         ]
 in
     Value.ReplaceType(
-        getJiraProjects,
+        getJiraBoards,
         functionType
     )
