@@ -154,7 +154,7 @@ let
         [
             Documentation.Name = "post-jira-worklogs-updated",
             Documentation.Description = "Post Jira worklogs updated since a given date. Internally calls /rest/api/3/worklog/updated to collect worklog IDs and uses POST /rest/api/3/worklog/list to retrieve full worklog details in batches of up to 1000 items. The result is returned as a typed table with fields id, issueId, author_accountId, author_dp, updateAuthor_accountId, timeSpent, timeSpentSeconds, created, updated and started. It is strongly recommended to pass fromDateAsText so you do not scan worklogs from the beginning of time.",
-            Documentation.Source = "https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-issue-worklogs/",
+            Documentation.Source = "https://www.vojtechsima.com/",
             Documentation.Version = "1.0",
             Documentation.Author = "Vojtěch Šíma",
             Documentation.Examples =
@@ -175,4 +175,5 @@ in
     Value.ReplaceType(
         postWorklogsUpdated,
         functionType
+
     )
