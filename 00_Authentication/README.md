@@ -35,6 +35,16 @@ Screenshots for reference:
 
 Make sure you copy the token at this step, because you will not see it again. With this token, you can finish the setup and use the helper function to build the `Authorization` header value.
 
+Since we build our own Authorization header, we also have to set our Data Source credentials to Anonymous (in PBI Desktop, and later in Service), otherwise it won't work.
+
+<img width="699" height="305" alt="image" src="https://github.com/user-attachments/assets/1e1ed14e-3914-42cc-831d-80224f3df971" />
+<br>
+
+<img width="402" height="334" alt="image" src="https://github.com/user-attachments/assets/4d7a7e6c-5406-4cef-8c05-6f74476b5771" />
+
+For more stuff about authentication in Power Query and APIs, check out my [blog](https://www.vojtechsima.com/post/api-authentication-in-power-query)
+
+
 ---
 
 ## Security note
