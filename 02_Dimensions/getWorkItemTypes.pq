@@ -71,7 +71,7 @@ let
         [
             Documentation.Name = "get-jira-work-item-types",
             Documentation.Description = "Get Jira work item types via GET /rest/api/3/issuetype. The function returns all work item types visible to the user as a typed table with fields id, description, name, untranslatedName, subtask and hierarchyLevel.",
-            Documentation.Source = "Atlassian Jira Cloud REST API reference for /rest/api/3/issuetype",
+            Documentation.Source = "https://www.vojtechsima.com/",
             Documentation.Version = "1.0",
             Documentation.Author = "Vojtěch Šíma",
             Documentation.Examples =
@@ -87,4 +87,5 @@ in
     Value.ReplaceType(
         getWorkItemTypes,
         functionType
+
     )
