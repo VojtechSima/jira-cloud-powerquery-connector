@@ -169,7 +169,7 @@ let
         [
             Documentation.Name = "post-jql-search",
             Documentation.Description = "Post JQL search for Jira work items via POST /rest/api/3/search/jql. The Jira expand parameter is not exposed, so the function returns only the requested fields. The resultMode parameter controls the shape of the result. When resultMode is ""table"" the function returns a table, for any other value it returns a list of records.",
-            Documentation.Source = "https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-issue-search/",
+            Documentation.Source = "https://www.vojtechsima.com/",
             Documentation.Version = "1.1",
             Documentation.Author = "Vojtěch Šíma",
             Documentation.Examples =
@@ -195,4 +195,5 @@ in
     Value.ReplaceType(
         postJqlSearch,
         functionType
+
     )
