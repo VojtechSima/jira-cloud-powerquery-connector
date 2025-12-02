@@ -1,7 +1,6 @@
 let
     getJiraSprints =
         (
-            jiraHost as text,
             authorizationToken as text
         ) =>
         let
@@ -92,14 +91,7 @@ let
     functionType =
         type function
         (
-            jiraHost as
-                (type text meta
-                    [
-                        Documentation.FieldCaption = "jiraHost",
-                        Documentation.FieldDescription = "Jira cloud host in the form ""https://tenant.atlassian.net"".",
-                        Documentation.SampleValues = { "https://tenant.atlassian.net" }
-                    ]
-                ),
+            
 
             authorizationToken as
                 (type text meta
@@ -113,7 +105,7 @@ let
         as any meta
         [
             Documentation.Name = "get-jira-sprints",
-            Documentation.Description = "Get Jira sprints via /rest/agile/1.0/board and /rest/agile/1.0/board/{boardId}/sprint. The function first loads all boards, then pages through sprints for each board using startAt and an internal page size of 50 until all results are scanned based on the total field returned by the API. The result is returned as a typed table with sprint fields (id, state, name, startDate, endDate, completeDate, originBoardId and goal).",
+            Documentation.Description = "Get Jira sprints via /rest/agile/1.0/board and /rest/agile/1.0/board/{boardId}/sprint. The function first loads all boards, then pages through sprints for each board using startAt and an internal page size of 50 until all results are scanned based on the total field returned by the API. The result is returned as a typed table with sprint fields (id, state, name, startDate, endDate, completeDate, originBoardId and goal). Note: Provide the jiraHost parameter when calling this function.",
             Documentation.Source = "https://www.vojtechsima.com/",
             Documentation.Version = "1.1",
             Documentation.Author = "Vojtěch Šíma",
@@ -121,7 +113,7 @@ let
                 {
                     [
                         Description = "Load all sprints for all boards with internal paging (page size 50).",
-                        Code = "getJiraSprints(""https://tenant.atlassian.net"", ""Basic user:token"")",
+                        Code = "getJiraSprints(""Basic user:token"")",
                         Result = "Returns a table of Jira sprints across all boards, including state, dates and originBoardId."
                     ]
                 }

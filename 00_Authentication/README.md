@@ -66,3 +66,30 @@ That way, the token is not hardcoded in the .pbix file. So if you lose the file,
 
 ```m
 getBasicAuthorizationToken(user as text, token as text) as text
+
+---
+
+## `jiraHost` parameter (required)
+
+The queries in this repository expect a Power Query parameter named `jiraHost` to be available at runtime. It must be a Text parameter containing your Jira Cloud host URL in the following format:
+
+- Example value: `https://tenant.atlassian.net`
+
+Why this is required: Power BI Service enforces restrictions around dynamic data sources. Supplying the host as a named Power Query parameter (called `jiraHost`) is inconvenient but necessary so the queries can use the `jiraHost` value without making the Power BI Service treat the source as a dynamic/untrusted source.
+
+How to create the parameter in Power BI Desktop:
+
+1. Open Power BI Desktop and go to `Home` → `Transform data` → `Transform data` to open Power Query Editor.
+2. In Power Query Editor, choose `Home` → `Manage Parameters` → `New Parameter`.
+3. Configure the parameter:
+	- **Name:** `jiraHost`  (this exact name is required)
+	- **Description:** Jira Cloud host URL (for example `https://tenant.atlassian.net`)
+	- **Type:** `Text`
+	- **Suggested Values:** `Any value`
+	- **Current Value:** `https://tenant.atlassian.net` (replace with your tenant)
+4. Click `OK` to create the parameter. The queries will read `jiraHost` from the parameter at runtime.
+
+Notes:
+- Do not rename the parameter: the functions reference `jiraHost` directly in the `Web.Contents(...)` calls.
+- This approach is required to avoid Power BI Service dynamic source restrictions when the host would otherwise be injected dynamically at runtime.
+

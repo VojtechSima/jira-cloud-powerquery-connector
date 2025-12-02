@@ -1,7 +1,6 @@
 let
     getJqlSearchWithChangelog =
         (
-            jiraHost as text,
             authorizationToken as text,
             resultMode as text,
             optional jql as nullable text,
@@ -110,14 +109,7 @@ let
     functionType =
         type function
         (
-            jiraHost as
-                (type text meta
-                    [
-                        Documentation.FieldCaption = "jiraHost",
-                        Documentation.FieldDescription = "Jira cloud host in the form ""https://tenant.atlassian.net"".",
-                        Documentation.SampleValues = { "https://tenant.atlassian.net" }
-                    ]
-                ),
+            
 
             authorizationToken as
                 (type text meta
@@ -166,7 +158,7 @@ let
         as any meta
         [
             Documentation.Name = "get-jql-search-with-changelog",
-            Documentation.Description = "Get work items from Jira using JQL, with expand = ""changelog"" always applied via /rest/api/3/search/jql. Because changelog can be large, this function is intended for narrower field sets and is best used as a fact table that you relate to a dim WorkItems table loaded by a simpler query. The resultMode parameter controls the shape of the result. When resultMode is ""table"" the function returns a table, for any other value it returns a list of records.",
+            Documentation.Description = "Get work items from Jira using JQL, with expand = ""changelog"" always applied via /rest/api/3/search/jql. Because changelog can be large, this function is intended for narrower field sets and is best used as a fact table that you relate to a dim WorkItems table loaded by a simpler query. The resultMode parameter controls the shape of the result. When resultMode is ""table"" the function returns a table, for any other value it returns a list of records. Note: Provide the jiraHost parameter when calling this function.",
             Documentation.Source = "https://www.vojtechsima.com",
             Documentation.Version = "1.1",
             Documentation.Author = "Vojtěch Šíma",
@@ -174,17 +166,17 @@ let
                 {
                     [
                         Description = "Basic use with default parameters and list return mode.",
-                        Code = "getJqlSearchWithChangelog(""https://tenant.atlassian.net"", ""Basic user:token"", ""list"")",
+                        Code = "getJqlSearchWithChangelog(""Basic user:token"", ""list"")",
                         Result = "Returns a list of records, each containing id, key, fields and changelog for matching Jira work items."
                     ],
                     [
                         Description = "Return a table using a custom JQL filter and default fields.",
-                        Code = "getJqlSearchWithChangelog(""https://tenant.atlassian.net"", ""Basic user:token"", ""table"", ""project = 'DEMO' AND status = 'Done'"")",
+                        Code = "getJqlSearchWithChangelog(""Basic user:token"", ""table"", ""project = 'DEMO' AND status = 'Done'"")",
                         Result = "Returns a table with columns id, key, fields and changelog."
                     ],
                     [
                         Description = "Return a table with all supported optional parameters specified. Use as a fact table and relate it to a dim WorkItems table.",
-                        Code = "getJqlSearchWithChangelog(""https://tenant.atlassian.net"", ""Basic user:token"", ""table"", ""assignee = currentUser()"", ""summary, created, status, assignee"")",
+                        Code = "getJqlSearchWithChangelog(""Basic user:token"", ""table"", ""assignee = currentUser()"", ""summary, created, status, assignee"")",
                         Result = "Returns a table of Jira work items that match the JQL, including changelog, with multiple pages combined using the internal default page size."
                     ]
                 }

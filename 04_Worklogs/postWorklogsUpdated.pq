@@ -1,7 +1,6 @@
 let
     postWorklogsUpdated =
         (
-            jiraHost as text,
             authorizationToken as text,
             optional fromDateAsText as nullable text
         ) =>
@@ -123,14 +122,7 @@ let
     functionType =
         type function
         (
-            jiraHost as
-                (type text meta
-                    [
-                        Documentation.FieldCaption = "jiraHost",
-                        Documentation.FieldDescription = "Jira cloud host in the form ""https://tenant.atlassian.net"".",
-                        Documentation.SampleValues = { "https://tenant.atlassian.net" }
-                    ]
-                ),
+            
 
             authorizationToken as
                 (type text meta
@@ -153,7 +145,7 @@ let
         as any meta
         [
             Documentation.Name = "post-jira-worklogs-updated",
-            Documentation.Description = "Post Jira worklogs updated since a given date. Internally calls /rest/api/3/worklog/updated to collect worklog IDs and uses POST /rest/api/3/worklog/list to retrieve full worklog details in batches of up to 1000 items. The result is returned as a typed table with fields id, issueId, author_accountId, author_dp, updateAuthor_accountId, timeSpent, timeSpentSeconds, created, updated and started. It is strongly recommended to pass fromDateAsText so you do not scan worklogs from the beginning of time.",
+            Documentation.Description = "Post Jira worklogs updated since a given date. Internally calls /rest/api/3/worklog/updated to collect worklog IDs and uses POST /rest/api/3/worklog/list to retrieve full worklog details in batches of up to 1000 items. The result is returned as a typed table with fields id, issueId, author_accountId, author_dp, updateAuthor_accountId, timeSpent, timeSpentSeconds, created, updated and started. It is strongly recommended to pass fromDateAsText so you do not scan worklogs from the beginning of time. Note: Provide the jiraHost parameter when calling this function.",
             Documentation.Source = "https://www.vojtechsima.com/",
             Documentation.Version = "1.0",
             Documentation.Author = "Vojtěch Šíma",
@@ -161,12 +153,12 @@ let
                 {
                     [
                         Description = "Load worklogs updated since 1 January 2024 using basic authentication with user and token.",
-                        Code = "postWorklogsUpdated(""https://tenant.atlassian.net"", ""Basic user:token"", ""2024-01-01"")",
+                        Code = "postWorklogsUpdated(""Basic user:token"", ""2024-01-01"")",
                         Result = "Returns a table of worklogs updated since 1 January 2024, including issueId, author and time tracking fields."
                     ],
                     [
                         Description = "Load all worklogs from the beginning of time (not recommended for large instances).",
-                        Code = "postWorklogsUpdated(""https://tenant.atlassian.net"", ""Basic user:token"")",
+                        Code = "postWorklogsUpdated(""Basic user:token"")",
                         Result = "Returns a table of all worklogs the user can see, which may be very large and slow to refresh."
                     ]
                 }

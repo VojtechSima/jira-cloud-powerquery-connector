@@ -1,7 +1,6 @@
 let
     getJiraUsers =
         (
-            jiraHost as text,
             authorizationToken as text
         ) =>
         let
@@ -84,14 +83,7 @@ let
     functionType =
         type function
         (
-            jiraHost as
-                (type text meta
-                    [
-                        Documentation.FieldCaption = "jiraHost",
-                        Documentation.FieldDescription = "Jira cloud host in the form ""https://tenant.atlassian.net"".",
-                        Documentation.SampleValues = { "https://tenant.atlassian.net" }
-                    ]
-                ),
+            
 
             authorizationToken as
                 (type text meta
@@ -105,7 +97,7 @@ let
         as any meta
         [
             Documentation.Name = "get-jira-users",
-            Documentation.Description = "Get Jira users via GET /rest/api/3/users/search. The function pages through users using startAt and maxResults until a page comes back empty or the internal maxRequests limit is reached. Internally it uses a page size of 1000 users and a maximum of 200 paged requests. The result is always returned as a typed table with accountId, accountType, emailAddress, displayName and active columns.",
+            Documentation.Description = "Get Jira users via GET /rest/api/3/users/search. The function pages through users using startAt and maxResults until a page comes back empty or the internal maxRequests limit is reached. Internally it uses a page size of 1000 users and a maximum of 200 paged requests. The result is always returned as a typed table with accountId, accountType, emailAddress, displayName and active columns. Note: Provide the jiraHost parameter when calling this function.",
             Documentation.Source = "https://www.vojtechsima.com",
             Documentation.Version = "1.1",
             Documentation.Author = "Vojtěch Šíma",
@@ -113,7 +105,7 @@ let
                 {
                     [
                         Description = "Load users with internal defaults (page size 1000, up to 200 requests).",
-                        Code = "getJiraUsers(""https://tenant.atlassian.net"", ""Basic user:token"")",
+                        Code = "getJiraUsers(""Basic user:token"")",
                         Result = "Returns a table of Jira users with columns accountId, accountType, emailAddress, displayName and active."
                     ]
                 }

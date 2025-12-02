@@ -1,7 +1,6 @@
 let
     getJiraBoards =
         (
-            jiraHost as text,
             authorizationToken as text
         ) =>
         let
@@ -91,14 +90,7 @@ let
     functionType =
         type function
         (
-            jiraHost as
-                (type text meta
-                    [
-                        Documentation.FieldCaption = "jiraHost",
-                        Documentation.FieldDescription = "Jira cloud host in the form ""https://tenant.atlassian.net"".",
-                        Documentation.SampleValues = { "https://tenant.atlassian.net" }
-                    ]
-                ),
+            
 
             authorizationToken as
                 (type text meta
@@ -112,7 +104,7 @@ let
         as any meta
         [
             Documentation.Name = "get-jira-boards",
-            Documentation.Description = "Get Jira boards via GET /rest/agile/1.0/board. The function pages through boards using startAt and an internal maxResults value of 50 until all results are scanned based on the total field returned by the API. The result is returned as a typed table with board fields and flattened location fields (projectId, displayName, projectName, projectKey, projectTypeKey and name).",
+            Documentation.Description = "Get Jira boards via GET /rest/agile/1.0/board. The function pages through boards using startAt and an internal maxResults value of 50 until all results are scanned based on the total field returned by the API. The result is returned as a typed table with board fields and flattened location fields (projectId, displayName, projectName, projectKey, projectTypeKey and name). Note: Provide the jiraHost parameter when calling this function.",
             Documentation.Source = "https://www.vojtechsima.com/",
             Documentation.Version = "1.1",
             Documentation.Author = "Vojtěch Šíma",
@@ -120,7 +112,7 @@ let
                 {
                     [
                         Description = "Load boards with the internal default page size (50).",
-                        Code = "getJiraBoards(""https://tenant.atlassian.net"", ""Basic user:token"")",
+                        Code = "getJiraBoards(""Basic user:token"")",
                         Result = "Returns a table of Jira boards with board level fields and flattened location fields."
                     ]
                 }

@@ -1,7 +1,6 @@
 let
     getJqlSearch =
         (
-            jiraHost as text,
             authorizationToken as text,
             resultMode as text,
             optional jql as nullable text,
@@ -106,14 +105,7 @@ let
     functionType =
         type function
         (
-            jiraHost as
-                (type text meta
-                    [
-                        Documentation.FieldCaption = "jiraHost",
-                        Documentation.FieldDescription = "Jira cloud host in the form ""https://tenant.atlassian.net"".",
-                        Documentation.SampleValues = { "https://tenant.atlassian.net" }
-                    ]
-                ),
+            
 
             authorizationToken as
                 (type text meta
@@ -162,7 +154,7 @@ let
         as any meta
         [
             Documentation.Name = "get-jql-search",
-            Documentation.Description = "Get work items from Jira using JQL via /rest/api/3/search/jql. The Jira expand query parameter is intentionally not supported, so the function always returns only the requested fields. The resultMode parameter controls the shape of the result. When resultMode is ""table"" the function returns a table, for any other value it returns a list of records.",
+            Documentation.Description = "Get work items from Jira using JQL via /rest/api/3/search/jql. The Jira expand query parameter is intentionally not supported, so the function always returns only the requested fields. The resultMode parameter controls the shape of the result. When resultMode is ""table"" the function returns a table, for any other value it returns a list of records. Note: Provide the jiraHost parameter when calling this function.",
             Documentation.Source = "https://www.vojtechsima.com",
             Documentation.Version = "1.1",
             Documentation.Author = "Vojtěch Šíma",
@@ -170,17 +162,17 @@ let
                 {
                     [
                         Description = "Basic use with default parameters and list result.",
-                        Code = "getJqlSearch(""https://tenant.atlassian.net"", ""Basic user:token"", ""list"")",
+                            Code = "getJqlSearch(""Basic user:token"", ""list"")",
                         Result = "Returns a list of records, each containing id, key and fields for matching Jira work items."
                     ],
                     [
                         Description = "Return a table using a custom JQL filter and default fields.",
-                        Code = "getJqlSearch(""https://tenant.atlassian.net"", ""Basic user:token"", ""table"", ""project = 'DEMO' AND status = 'Done'"")",
+                        Code = "getJqlSearch(""Basic user:token"", ""table"", ""project = 'DEMO' AND status = 'Done'"")",
                         Result = "Returns a table with columns id, key and fields."
                     ],
                     [
                         Description = "Return a table with all supported optional parameters specified.",
-                        Code = "getJqlSearch(""https://tenant.atlassian.net"", ""Basic user:token"", ""table"", ""assignee = currentUser()"", ""summary, created, status, assignee"")",
+                        Code = "getJqlSearch(""Basic user:token"", ""table"", ""assignee = currentUser()"", ""summary, created, status, assignee"")",
                         Result = "Returns a table of Jira work items that match the JQL, with the selected fields. The result is assembled from multiple pages that each use the internal default page size."
                     ]
                 }

@@ -1,7 +1,6 @@
 let
     getWorkItemTypes =
         (
-            jiraHost as text,
             authorizationToken as text
         ) =>
         let
@@ -49,14 +48,7 @@ let
     functionType =
         type function
         (
-            jiraHost as
-                (type text meta
-                    [
-                        Documentation.FieldCaption = "jiraHost",
-                        Documentation.FieldDescription = "Jira cloud host in the form ""https://tenant.atlassian.net"".",
-                        Documentation.SampleValues = { "https://tenant.atlassian.net" }
-                    ]
-                ),
+            
 
             authorizationToken as
                 (type text meta
@@ -70,7 +62,7 @@ let
         as any meta
         [
             Documentation.Name = "get-jira-work-item-types",
-            Documentation.Description = "Get Jira work item types via GET /rest/api/3/issuetype. The function returns all work item types visible to the user as a typed table with fields id, description, name, untranslatedName, subtask and hierarchyLevel.",
+            Documentation.Description = "Get Jira work item types via GET /rest/api/3/issuetype. The function returns all work item types visible to the user as a typed table with fields id, description, name, untranslatedName, subtask and hierarchyLevel. Note: Provide the jiraHost parameter when calling this function.",
             Documentation.Source = "https://www.vojtechsima.com/",
             Documentation.Version = "1.0",
             Documentation.Author = "Vojtěch Šíma",
@@ -78,7 +70,7 @@ let
                 {
                     [
                         Description = "Load all work item types from Jira using basic authentication with user and token.",
-                        Code = "getWorkItemTypes(""https://tenant.atlassian.net"", ""Basic user:token"")",
+                        Code = "getWorkItemTypes(""Basic user:token"")",
                         Result = "Returns a table of Jira work item types including id, description, name, untranslatedName, subtask and hierarchyLevel."
                     ]
                 }

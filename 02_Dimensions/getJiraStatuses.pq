@@ -1,7 +1,6 @@
 let
     getJiraStatuses =
         (
-            jiraHost as text,
             authorizationToken as text
         ) =>
         let
@@ -53,14 +52,7 @@ let
     functionType =
         type function
         (
-            jiraHost as
-                (type text meta
-                    [
-                        Documentation.FieldCaption = "jiraHost",
-                        Documentation.FieldDescription = "Jira cloud host in the form ""https://tenant.atlassian.net"".",
-                        Documentation.SampleValues = { "https://tenant.atlassian.net" }
-                    ]
-                ),
+            
 
             authorizationToken as
                 (type text meta
@@ -74,7 +66,7 @@ let
         as any meta
         [
             Documentation.Name = "get-jira-statuses",
-            Documentation.Description = "Get Jira workflow statuses via GET /rest/api/3/status. The function returns all statuses associated with active workflows, including status category information (id, key, name and colorName).",
+            Documentation.Description = "Get Jira workflow statuses via GET /rest/api/3/status. The function returns all statuses associated with active workflows, including status category information (id, key, name and colorName). Note: Provide the jiraHost parameter when calling this function.",
             Documentation.Source = "https://www.vojtechsima.com/",
             Documentation.Version = "1.1",
             Documentation.Author = "Vojtěch Šíma",
@@ -82,7 +74,7 @@ let
                 {
                     [
                         Description = "Load all workflow statuses from Jira.",
-                        Code = "getJiraStatuses(""https://tenant.atlassian.net"", ""Basic user:token"")",
+                        Code = "getJiraStatuses(""Basic user:token"")",
                         Result = "Returns a table of Jira statuses including id, description, name, untranslatedName and statusCategory fields."
                     ]
                 }
